@@ -91,56 +91,6 @@ class Lexer(object):
  
 ################################################################################
 #                                                                              #
-#                            Abstract Syntax Tree                              #
-#                                                                              #
-################################################################################
-class AST:
-    pass
-
-
-class BinOpNode(AST):
-    def __init__(self, op, lnode, rnode):
-        self.op = op
-        self.lnode = lnode
-        self.rnode = rnode
-
-    def visit(self):
-        if self.op.type == ADD:
-            return self.lnode.visit() + self.rnode.visit()
-
-        elif self.op.type == SUB:
-            return self.lnode.visit() - self.rnode.visit()
-
-        elif self.op.type == MUL:
-            return self.lnode.visit() * self.rnode.visit()
-
-        elif self.op.type == DIV:
-            return self.lnode.visit() / self.rnode.visit()
-
-
-class NumNode(AST):
-    def __init__(self, num):
-        self.num = num
-
-    def visit(self):
-        return self.num.value
-
-
-class UniOpNode(AST):
-    def __init__(self, op, node):
-        self.op = op
-        self.node = node
-
-    def visit(self):
-        if self.op.type == ADD:
-            return self.node.visit()
-        
-        elif self.op.type == SUB:
-            return - self.node.visit()
-
-
-################################################################################
-#                                                                              #
 #                                   Parser                                     #
 #                                                                              #
 ################################################################################
@@ -235,6 +185,51 @@ class Parser(object):
 
         else:
             self.error("invalid syntax")
+
+
+class AST:
+    pass
+
+
+class BinOpNode(AST):
+    def __init__(self, op, lnode, rnode):
+        self.op = op
+        self.lnode = lnode
+        self.rnode = rnode
+
+    def visit(self):
+        if self.op.type == ADD:
+            return self.lnode.visit() + self.rnode.visit()
+
+        elif self.op.type == SUB:
+            return self.lnode.visit() - self.rnode.visit()
+
+        elif self.op.type == MUL:
+            return self.lnode.visit() * self.rnode.visit()
+
+        elif self.op.type == DIV:
+            return self.lnode.visit() / self.rnode.visit()
+
+
+class NumNode(AST):
+    def __init__(self, num):
+        self.num = num
+
+    def visit(self):
+        return self.num.value
+
+
+class UniOpNode(AST):
+    def __init__(self, op, node):
+        self.op = op
+        self.node = node
+
+    def visit(self):
+        if self.op.type == ADD:
+            return self.node.visit()
+        
+        elif self.op.type == SUB:
+            return - self.node.visit()
 
 
 ################################################################################
