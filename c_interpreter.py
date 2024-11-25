@@ -2,6 +2,7 @@ INT, FUNC, RETURN, ADD, SUB, MUL, DIV = 'INT', 'FUNC', 'RETURN', 'ADD', 'SUB', '
 ID, EOF, LPA, RPA, LSB, RSB, LBR, RBR = 'ID', 'EOF', 'LPA', 'RPA', 'LSB', 'RSB', 'LBR', 'RBR' 
 TYPE = 'TYPE'
 
+
 class Token():
     def __init__(self, type, value):
         self.type = type
@@ -11,11 +12,12 @@ class Token():
         return f"Token({self.type}, {self.value})"
 
     def __repr__(self):
-        return __str__(self)
+        return self.__str__()
+
 
 class Lexer(object):
     def __init__(self, text):
-        self,text = text
+        self.text = text
         self.index = 0
         self.current_char = self.text[self.index]
 
@@ -28,7 +30,7 @@ class Lexer(object):
             self.current_char = self.text[self.index]
         else:
             self.current_char = None
-            
+
     def skip_whitespace(self):
         while self.current_char is not None and self.current_char.isspace():
             self.advance()
@@ -88,11 +90,13 @@ class Lexer(object):
 
             else:
                 self.error("invalid syntax")
-                
+
         return Token(EOF, 'EOF')
+
 
 class AST:
     pass
+
 
 class FuncNode(AST):
     def __init__(self, type, name, params, body):

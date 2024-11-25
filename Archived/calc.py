@@ -1,19 +1,7 @@
-INT,FLOAT, EOF, ADD, SUB, MUL, DIV, LPA, RPA = 'INT', 'FLOAT', 'EOF', 'ADD', 'SUB', 'MUL', 'DIV', 'LPA', 'RPA' 
-
-class Token(object):
-    def __init__(self, type, value):
-        self.type = type
-        self.value = value
-
-    def __str__(self):
-        return f"Token({self.type}, {self.value})"
-
-    __repr__ = __str__
+INT, FLOAT, EOF, ADD, SUB, MUL, DIV, LPA, RPA = 'INT', 'FLOAT', 'EOF', 'ADD', 'SUB', 'MUL', 'DIV', 'LPA', 'RPA' 
 
 ################################################################################
-#                                                                              #
 #                                   Lexer                                      #
-#                                                                              #
 ################################################################################
 class Lexer(object):
     def __init__(self, text):
@@ -51,7 +39,6 @@ class Lexer(object):
 
     def get_next_token(self):
         while self.current_char is not None:
-
             if self.current_char.isdigit() or self.current_char == '.':
                 return self.get_a_number()
 
@@ -85,14 +72,22 @@ class Lexer(object):
 
             else:
                 self.error("invalid syntax")
-                
+
         return Token(EOF, 'EOF')
 
- 
+
+class Token(object):
+    def __init__(self, type, value):
+        self.type = type
+        self.value = value
+
+    def __str__(self):
+        return f"Token({self.type}, {self.value})"
+
+    __repr__ = __str__
+
 ################################################################################
-#                                                                              #
 #                                   Parser                                     #
-#                                                                              #
 ################################################################################
 class Parser(object):
     def __init__(self, lexer):
@@ -161,11 +156,11 @@ class Parser(object):
         current_token = self.current_token
         if current_token.type == INT:
             self.eat(INT)
-            return NumNode(current_token) 
+            return NumNode(current_token)
 
         elif current_token.type == FLOAT:
             self.eat(FLOAT)
-            return NumNode(current_token) 
+            return NumNode(current_token)
 
         elif current_token.type == ADD:
             op = self.current_token
@@ -227,15 +222,13 @@ class UniOpNode(AST):
     def visit(self):
         if self.op.type == ADD:
             return self.node.visit()
-        
+
         elif self.op.type == SUB:
             return - self.node.visit()
 
 
 ################################################################################
-#                                                                              #
 #                                 Interpreter                                  #
-#                                                                              #
 ################################################################################
 class Interpreter(object):
     def __init__(self, parser):
@@ -245,6 +238,9 @@ class Interpreter(object):
         return self.parser.parse().visit()
 
 
+################################################################################
+#                                   Main
+################################################################################
 if __name__ == '__main__':
     while True:
         s = input("input the expression(q to exit):")
@@ -254,3 +250,5 @@ if __name__ == '__main__':
         parser = Parser(lexer)
         interpreter = Interpreter(parser)
         print(interpreter.interprete())
+
+# vim:foldmethod=indent
