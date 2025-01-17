@@ -1,2 +1,2 @@
-## This is my C interpreter (developing)
+# This is my C interpreter (developing)
 noting special
