@@ -1,6 +1,7 @@
-INT, FUNC, RETURN, ADD, SUB, MUL, DIV = 'INT', 'FUNC', 'RETURN', 'ADD', 'SUB', 'MUL', 'DIV' 
-ID, EOF, LPA, RPA, LSB, RSB, LBR, RBR = 'ID', 'EOF', 'LPA', 'RPA', 'LSB', 'RSB', 'LBR', 'RBR' 
-TYPE = 'TYPE'
+INT, FUNC, RETURN = 'INT', 'FUNC', 'RETURN'
+ADD, SUB, MUL, DIV = 'ADD', 'SUB', 'MUL', 'DIV'
+TYPE, ID, EOF = 'TYPE', 'ID', 'EOF'
+LPA, RPA, LSB, RSB, LBR, RBR = 'LPA', 'RPA', 'LSB', 'RSB', 'LBR', 'RBR'
 
 
 class Token():
@@ -103,4 +104,4 @@ class FuncNode(AST):
         self.type = type
         self.name = name
         self.params = params
-        self.body = self.body
+        self.body = body

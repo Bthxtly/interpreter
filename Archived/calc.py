@@ -244,11 +244,11 @@ class Interpreter(object):
 
 
 ###############################################################################
-#                                  Main
+#                                  Main                                       #
 ###############################################################################
 if __name__ == '__main__':
     while True:
-        s = input("input the expression(q to exit):")
+        s = input("input the expression(q to exit): ")
         if s == '' or s.upper() == 'Q':
             break
         lexer = Lexer(s)
