@@ -226,5 +226,18 @@ def test():
     print(f"The Lisp style of the expression {expression}:\n" + lisp)
 
 
+def main():
+    print("Translate the expression to RPN and Lisp style.")
+    print("Input expressions, q or Q to exit.")
+    expression = input()
+    while expression.upper() != "Q":
+        ast = Parser(Lexer(expression)).parse()
+        rpn = Translator_RPN(ast).translate()
+        print("The RPN style: " + rpn)
+        lisp = Translator_Lisp(ast).translate()
+        print("The Lisp style: " + lisp)
+        expression = input()
+
+
 if __name__ == "__main__":
-    test()
+    main()
